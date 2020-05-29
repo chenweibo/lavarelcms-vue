@@ -175,8 +175,7 @@ export default {
       const diff = _.differenceBy(arr, component, 'label')
       // console.log(_.pull(arr, diff[0]))
       // console.log(_.differenceBy(arr, component, 'label'))
-
-      this.form.extra = _.pull(arr, diff[0])
+      this.form.extra =arr
     },
     setTagsViewTitle() {
       const title = '内容编辑'

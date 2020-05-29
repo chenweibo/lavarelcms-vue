@@ -259,7 +259,8 @@ export default {
 
       // console.log(_.differenceBy(arr, component, 'label'))
 
-      this.form.extra = _.pull(arr, diff[0])
+     // this.form.extra = _.pull(arr, diff[0])
+     this.form.extra =arr
     },
     setTagsViewTitle() {
       const title = '栏目编辑'

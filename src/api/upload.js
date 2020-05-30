@@ -8,3 +8,12 @@ export function imgUpload(data) {
     data
   })
 }
+
+export function fileUpload(data) {
+  return request({
+    url: 'admin/upload/file',
+    method: 'post',
+    headers: { 'Content-Type': 'multipart/form-data' },
+    data
+  })
+}

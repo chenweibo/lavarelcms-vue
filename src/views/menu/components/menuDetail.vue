@@ -254,13 +254,10 @@ export default {
 
       const arr = _.uniqBy(other, 'label')
       // console.log(arr)
-      const diff = _.differenceBy(arr, component, 'label')
+      // const diff = _.differenceBy(arr, component, 'label')
       // console.log(_.pull(arr, diff[0]))
-
-      // console.log(_.differenceBy(arr, component, 'label'))
-
-     // this.form.extra = _.pull(arr, diff[0])
-     this.form.extra =arr
+      this.form.extra = arr
+      // console.log(_.differenceBy(arr, component, 'label'))        // this.form.extra = _.pull(arr, diff[0]        this.form.extr=  =arr
     },
     setTagsViewTitle() {
       const title = '栏目编辑'

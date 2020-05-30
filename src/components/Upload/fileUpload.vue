@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import { imgUpload } from '@/api/upload.js'
+import { fileUpload } from '@/api/upload.js'
 
 export default {
   name: 'FileUpload',
@@ -37,13 +37,13 @@ export default {
       const formData = new FormData()
       formData.append('file', file.file)
 
-      imgUpload(formData).then(Response => {
+      fileUpload(formData).then(Response => {
         // 防止和原数据冲突改为负数
 
         this.defaultFileList.push({ uid: -(this.fileList.length + 1),
           name: Response.origin_name,
           status: 'done',
-          path: Response.path,
+          path: '/storage/' + Response.path,
           url: this.imgUrl + '/storage/' + Response.path })
       }).catch(() => {
 

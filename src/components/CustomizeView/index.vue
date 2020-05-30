@@ -20,6 +20,7 @@
         v-model="item.value"
         type="date"
         placeholder="选择日期"
+        format="yyyy-MM-dd"
       />
 
       <imgUpload v-if="item.type==='OneImgupload'" :img.sync="item.value" />

@@ -62,6 +62,15 @@ service.interceptors.response.use(
     const status = error.response.status
     const data = error.response.data
     if (status === 422) {
+      if (data.errors === undefined) {
+        Message({
+          message: data.message,
+          type: 'error',
+          duration: 3 * 1000
+        })
+        return Promise.reject(error)
+      }
+
       Message({
         message: Object.values(data.errors)[0][0],
         type: 'error',

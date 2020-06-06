@@ -240,6 +240,11 @@ export default {
         this.viewList = view
         this.treeList = this.appendTopMenu(menuTree)
         this.handleComponent(content.extra, component)
+        if (this.form.parentId === 0) {
+          this.valueId = -1
+        } else {
+          this.valueId = this.form.parentId
+        }
 
         // set tagsview title
         this.setTagsViewTitle()

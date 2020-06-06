@@ -2,19 +2,12 @@
   <div>
     <a-alert message="非专业人员切勿修改文件，以免造成网站崩溃及其各种问题。" banner />
     <div class="app-container">
-      <a-button type="primary" icon="cloud-upload" style="margin-bottom:20px" />
+      <a-button type="primary" style="margin-bottom:20px">上传</a-button>
       <el-table
-        :data="filelist"
+        :data="list"
         style="width: 100%"
       >
-        <el-table-column
 
-          label="文件名"
-        >
-          <template slot-scope="scope">
-            {{ scope.row }}
-          </template>
-        </el-table-column>
         <el-table-column
           fixed="right"
           label="操作"
@@ -26,7 +19,7 @@
         </el-table-column>
       </el-table>
 
-      <a-modal
+      <!-- <a-modal
         title="编辑"
         :visible="visible"
         width="70%"
@@ -38,20 +31,20 @@
         @cancel="handleCancel"
       >
         <codemirror ref="myCmGenerate" v-model="code" :options="editorOption" />
-      </a-modal>
+      </a-modal> -->
     </div>
   </div>
 </template>
 <script>
 import { getViewList, getFileInfo } from '@/api/file.js'
 
-import { codemirror } from 'vue-codemirror'
+// import { codemirror } from 'vue-codemirror'
 import './setting.js'
 
 export default {
   name: 'FileView',
   components: {
-    codemirror
+    // codemirror
   },
   data() {
     return {
@@ -84,10 +77,6 @@ export default {
   },
   computed: {
     // 计算属性的 getter
-    filelist: function() {
-      // `this` 指向 vm 实例
-      return this.list.filter(v => { return v !== '.' && v !== '..' })
-    }
   },
   created() {
     this.getlist()

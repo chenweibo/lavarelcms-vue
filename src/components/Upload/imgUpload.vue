@@ -58,6 +58,8 @@ export default {
 
         this.$emit('update:img', this.path + '/storage/' + Response.path)
         this.loading = false
+      }).catch(() => {
+        this.loading = false
       })
     },
     remove() {

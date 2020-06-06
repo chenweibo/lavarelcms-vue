@@ -80,6 +80,16 @@ service.interceptors.response.use(
       return Promise.reject(error)
     }
 
+    if (status === 413) {
+      Message({
+        message: '文件太大,请处理后上传',
+        type: 'error',
+        duration: 5 * 1000
+      })
+
+      return Promise.reject(error)
+    }
+
     if (status === 401) {
       MessageBox.confirm('您已注销，可以取消以保留在该页面上，或者再次登录', '确认登出', {
         confirmButtonText: '重新登入',

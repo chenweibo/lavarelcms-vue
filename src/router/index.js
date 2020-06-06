@@ -193,37 +193,37 @@ export const constantRoutes = [
     }]
   },
 
-  // {
-  //   path: '/file',
-  //   component: Layout,
-  //   redirect: '/file/index',
-  //   meta: {
-  //     title: '文件管理',
-  //     icon: 'tab'
+  {
+    path: '/file',
+    component: Layout,
+    redirect: '/file/index',
+    meta: {
+      title: '文件管理',
+      icon: 'tab'
 
-  //   },
+    },
 
-  //   children: [{
-  //     path: 'index',
-  //     name: 'File',
-  //     component: () => import('@/views/file/index'),
-  //     meta: {
-  //       title: '资源文件'
+    children: [{
+      path: 'index',
+      name: 'File',
+      component: () => import('@/views/file/index'),
+      meta: {
+        title: '资源文件'
 
-  //     }
-  //   },
-  //   {
-  //     path: 'view',
-  //     name: 'FileView',
-  //     component: () => import('@/views/file/view'),
-  //     meta: {
-  //       title: '视图文件'
+      }
+    },
+    {
+      path: 'view',
+      name: 'FileView',
+      component: () => import('@/views/file/view'),
+      meta: {
+        title: '视图文件'
 
-  //     }
-  //   }
+      }
+    }
 
-  //   ]
-  // },
+    ]
+  },
   {
     path: '/recycle',
     component: Layout,

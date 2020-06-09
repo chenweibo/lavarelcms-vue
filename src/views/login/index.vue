@@ -67,10 +67,12 @@ export default {
         callback()
       }
     }
+
     return {
       loginForm: {
-        username: '',
-        password: ''
+        // 为了开发方便自定义开发账号
+        username: process.env.VUE_APP_BASE_USER,
+        password: process.env.VUE_APP_BASE_PASSWORD
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -88,6 +90,9 @@ export default {
       },
       immediate: true
     }
+  },
+  created() {
+
   },
   methods: {
     showPwd() {

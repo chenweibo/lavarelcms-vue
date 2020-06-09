@@ -8,6 +8,7 @@
 
       <template>
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
+        <Cache class="right-menu-item hover-effect" />
         <ClearCache class="right-menu-item hover-effect" />
         <error-log class="errLog-container right-menu-item hover-effect" />
       </template>
@@ -38,7 +39,8 @@ import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import Screenfull from '@/components/Screenfull'
 import ErrorLog from '@/components/ErrorLog'
-import ClearCache from '@/components/ClearCache'
+import ClearCache from '@/components/Cache/clear'
+import Cache from '@/components/Cache/cache'
 
 export default {
   components: {
@@ -46,7 +48,8 @@ export default {
     Hamburger,
     Screenfull,
     ErrorLog,
-    ClearCache
+    ClearCache,
+    Cache
   },
   computed: {
     ...mapGetters([

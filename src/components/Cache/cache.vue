@@ -1,13 +1,13 @@
 <template>
   <div>
-    <svg-icon icon-class="clear" @click="clear" />
+    <svg-icon icon-class="cache" @click="cache" />
   </div>
 </template>
 
 <script>
-import { clearCache } from '@/api/tools'
+import { Cache } from '@/api/tools'
 export default {
-  name: 'ClearCache',
+  name: 'Cache',
   props: {},
   data() {
     return {}
@@ -15,16 +15,16 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    clear() {
-      this.$confirm('是否清除缓存', '提示', {
+    cache() {
+      this.$confirm('一键缓存配置文件，以及路由文件，加快站点访问速度。如修改文件或者配置则需清除缓存。', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        clearCache().then(response => {
+        Cache().then(response => {
           this.$message({
             type: 'success',
-            message: '清除成功!'
+            message: '缓存成功!'
           })
         })
       }).catch(() => {})

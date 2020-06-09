@@ -14,3 +14,13 @@ export function getFileInfo(params) {
     params
   })
 }
+
+export function getFileListByPath(path) {
+  return request({
+    url: 'admin/file/path',
+    method: 'get',
+    params: {
+      path: path
+    }
+  })
+}

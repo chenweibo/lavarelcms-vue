@@ -6,3 +6,10 @@ export function clearCache() {
     method: 'get'
   })
 }
+
+export function Cache() {
+  return request({
+    url: '/admin/Cache',
+    method: 'get'
+  })
+}

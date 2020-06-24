@@ -68,7 +68,7 @@
     </div>
 
     <a-modal v-model="visible" :footer="null" width="70%" title="详情">
-      <a-descriptions title="" bordered>
+      <a-descriptions title="主要内容" bordered>
         <a-descriptions-item label="标题">
           {{ message.title }}
         </a-descriptions-item>
@@ -78,12 +78,21 @@
         <a-descriptions-item label="邮箱">
           {{ message.email }}
         </a-descriptions-item>
+        <a-descriptions-item label="地址">
+          {{ message.address }}
+        </a-descriptions-item>
 
         <a-descriptions-item label="详情内容">
           {{ message.detail }}
           <br>
+
         </a-descriptions-item>
+        <a-descriptions-item v-for="(v,k) in message.extra" :key="k" :label="v.label">
+          {{ v.value }}
+        </a-descriptions-item>
+
       </a-descriptions>
+
     </a-modal>
 
   </div>

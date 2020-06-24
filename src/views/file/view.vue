@@ -1,25 +1,41 @@
 <template>
   <div>
+
     <a-alert message="非专业人员切勿修改文件，以免造成网站崩溃及其各种问题。" banner />
+
     <div class="app-container">
-      <a-button type="primary" style="margin-bottom:20px">上传</a-button>
+      <el-breadcrumb separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item @click.native="getlist">根路径</el-breadcrumb-item>
+        <el-breadcrumb-item v-for="(v,k) in filePath " :key="k" @click.native="to(k,v)">{{ v }}</el-breadcrumb-item>
+
+      </el-breadcrumb>
+      <a-button type="primary" style="margin:20px 0;">上传</a-button>
       <el-table
         :data="list"
         style="width: 100%"
+        @row-dblclick="go"
       >
-
+        <el-table-column
+          prop="name"
+          label="文件名"
+        >
+          <template slot-scope="scope">
+            <i :class="scope.row.mime === 'directory'?'el-icon-folder-opened':'el-icon-document'">&nbsp;{{ scope.row.name }}</i>
+          </template>
+        </el-table-column>
         <el-table-column
           fixed="right"
           label="操作"
         >
           <template slot-scope="scope">
-            <el-button type="text" size="small" @click="handleClick(scope.row)">编辑</el-button>
+            <el-button v-show="scope.row.mime !== 'directory'" type="text" size="small" @click="handleClick(scope.row)">编辑</el-button>
+            <el-button type="text" size="small">重命名</el-button>
             <el-button type="text" size="small">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
 
-      <!-- <a-modal
+      <a-modal
         title="编辑"
         :visible="visible"
         width="70%"
@@ -31,20 +47,20 @@
         @cancel="handleCancel"
       >
         <codemirror ref="myCmGenerate" v-model="code" :options="editorOption" />
-      </a-modal> -->
+      </a-modal>
     </div>
   </div>
 </template>
 <script>
-import { getViewList, getFileInfo } from '@/api/file.js'
+import { getViewList, getFileInfo, getFileListByPath } from '@/api/file.js'
 
-// import { codemirror } from 'vue-codemirror'
+import { codemirror } from 'vue-codemirror'
 import './setting.js'
 
 export default {
   name: 'FileView',
   components: {
-    // codemirror
+    codemirror
   },
   data() {
     return {
@@ -76,6 +92,13 @@ export default {
     }
   },
   computed: {
+
+    filePath() {
+      if (this.path) {
+        return this.path.split('/')
+      }
+      return []
+    }
     // 计算属性的 getter
   },
   created() {
@@ -93,21 +116,35 @@ export default {
     },
     async handleClick(row) {
       this.tempFileName = row
-      await getFileInfo({ path: `${this.path}/${row}` }).then(Response => {
+
+      const path = `${this.path}/${row.name}`
+      console.log(path)
+
+      await getFileInfo({ path: path }).then(Response => {
         this.visible = true
-        this.code = Response
+        console.log(Response.data)
+
+        this.code = Response.data
       })
     },
+    getListByPath(path) {
+      getFileListByPath(path).then(Response => {
+        this.list = Response.list
+        this.path = Response.path
+      })
+    },
+    go(row, event, column) {
+      if (row.mime === 'directory') {
+        this.getListByPath(this.path + '/' + row.name)
+      }
+    },
+    to(k, v) {
+      const arr = this.filePath.slice(0, k)
+      arr.push(v)
+      this.getListByPath(arr.join('/'))
+    },
     handleOk(e) {
-      // this.ModalText = 'The modal will be closed after two seconds'
-      // this.confirmLoading = true
-      // console.log(this.code)
-      console.log(e)
 
-      // setTimeout(() => {
-      //   this.visible = false
-      //   this.confirmLoading = false
-      // }, 2000)
     },
     handleCancel(e) {
       this.visible = false
@@ -115,4 +152,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+.el-breadcrumb__item{
+  cursor: pointer;
+}
+</style>
 

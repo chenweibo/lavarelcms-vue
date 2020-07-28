@@ -17,7 +17,6 @@
             :props="props"
             :options="treeList"
             :value="valueId"
-            :clearable="isClearable"
             :accordion="isAccordion"
             @getValue="getValue($event)"
           />
@@ -280,7 +279,20 @@ export default {
       document.title = `${title} - ${this.form.title}`
     },
     getValue(value) {
-      this.form.parentId = value
+      // const data = JSON.parse(JSON.stringify(this.form.path))
+      // this.form.parentId = value
+      // this.form.path = data + '-' + value
+      const parentId = value[0]
+      const node = value[1]
+      if (parentId !== -1) {
+        this.form.parentId = parentId
+        this.form.path = node.path + '-' + parentId
+      } else {
+        this.form.parentId = 0
+        this.form.path = 0
+      }
+
+      //  this.form.path = node.path + '-' + value
     },
     getTree() {
       create().then(Response => {

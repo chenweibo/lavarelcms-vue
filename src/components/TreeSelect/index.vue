@@ -40,7 +40,7 @@ export default {
     value: { type: Number, default: null },
 
     // 可清空选项
-    clearable: { type: Boolean, default: true },
+    clearable: { type: Boolean, default: false },
 
     // 自动收起
     accordion: { type: Boolean, default: false }
@@ -100,7 +100,7 @@ export default {
     handleNodeClick(node) {
       this.valueTitle = node[this.props.label]
       this.valueId = node[this.props.value]
-      this.$emit('getValue', this.valueId)
+      this.$emit('getValue', [this.valueId, node])
       this.defaultExpandedKey = []
       this.$refs.select.blur()
     },

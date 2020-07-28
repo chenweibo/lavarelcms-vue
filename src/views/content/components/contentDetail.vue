@@ -16,7 +16,6 @@
             :props="props"
             :options="treeList"
             :value="valueId"
-            :clearable="isClearable"
             :accordion="isAccordion"
             @getValue="getValue($event)"
           />
@@ -187,7 +186,11 @@ export default {
       document.title = `${title} - ${this.form.title}`
     },
     getValue(value) {
-      this.form.menus_id = value
+      const parentId = value[0]
+      const node = value[1]
+
+      this.form.menus_id = parentId
+      this.form.path = node.path + '-' + parentId
     },
     save() {
       this.$refs['form'].validate((valid) => {

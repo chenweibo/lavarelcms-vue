@@ -77,8 +77,7 @@
           width="100"
         >
           <template slot-scope="scope">
-            <el-button v-if="scope.row.range!=='global'" type="text" size="small" @click="deleteHandleClick(scope.$index, scope.row)">删除</el-button>
-            <el-tag v-else type="warning" disable-transitions>全局组件</el-tag>
+            <el-button type="text" size="small" @click="deleteHandleClick(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -136,7 +135,7 @@ export default {
     onSubmit() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
-          const arr = ['fileMore', 'fileUpload']
+          const arr = ['fileMore', 'fileUpload', 'imgMoreUpload']
           if (arr.includes(this.form.type)) {
             this.form.value = []
           }

@@ -7,7 +7,7 @@
       :remove="remove"
       @preview="handlePreview"
     >
-      <div v-if="fileList.length < 8">
+      <div v-if="fileList!=null">
         <a-icon type="plus" />
         <div class="ant-upload-text">
           多图上传
@@ -59,12 +59,15 @@ export default {
 
       imgUpload(formData).then(Response => {
         // 防止和原数据冲突改为负数
-        this.fileList.push({ uid: -(this.fileList.length + 1),
-          name: Response.origin_name,
-          status: 'done',
-          path: Response.path,
-          url: this.imgUrl + '/storage/' + Response.path })
-      })
+        if (this.fileList) {
+          this.fileList.push({ uid: -(this.fileList.length + 1),
+            name: Response.origin_name,
+            status: 'done',
+            path: Response.path,
+            url: this.imgUrl + '/storage/' + Response.path })
+        }
+      }
+      )
     },
     async handlePreview(file) {
       if (!file.url && !file.preview) {

@@ -178,7 +178,7 @@ export default {
     onSubmit() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
-          const arr = ['fileMore', 'fileUpload']
+          const arr = ['fileMore', 'fileUpload', 'imgMoreUpload']
           if (arr.includes(this.detail.type)) {
             this.detail.value = []
           } else {
